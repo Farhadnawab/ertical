@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html >
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>DeltaQuad mission validator</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" name="viewport">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="./files/bootstrap-dist.css">
+		<link rel="stylesheet" href="./files/styles.css">
+		<script src="./files/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<script src="./files/jquery.min.js"></script>
+		<script src="https://cesiumjs.org/releases/1.62/Build/Cesium/Cesium.js"></script>
+		<link href="https://cesiumjs.org/releases/1.62/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+
+    <style>
+      
+        #chart {
+      max-width: 720px;
+      margin: 35px auto;
+      padding:0px;
+    }
+      
+    </style>
+
+    <script>
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
+    </script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+
+ <style>
+      #map {
+       height: 500px;
+       width: 100%;
+       overflow: hidden;       
+       border: thin solid #333;
+       }
+	.cesium-credit-textContainer{
+		display:none !important;
+	}
+
+    </style>		
+</head>	
+<body>
+<div id="container">
+   		<header id="header" >
+		 	<div id="menu" class="menu" style="background-color: black;">
+				<a href="../" class="logoThemecheck">
+					<span class="logo">
+						<img height=40 src="./files/logo.png">
+					</span>
+				</a>
+<!--
+				<div class="container_liste_menu">	
+					<ul id="liste_menu" class="liste_menu">
+						
+                                    <li><a href="http://themecheck.org/#ancreSubmit" class="link_intern">SUBMIT</a></li><li><a href="http://.org/#theme" class="link_intern">THEMES</a></li>                                               
+						
+                                               
+						<li>
+							<a href="http://.org/contact" id="contactPage">CONTACT</a>
+						</li>
+					</ul>
+			    </div>
+				<a href="http://themecheck.org/score/wordpress-theme-faceblog.html#" id="icon_menu_mobile">
+					<span class="line line1"></span>
+					<span class="line line2"></span>
+					<span class="line line3"></span>
+				</a>
+-->
+			</div>
+
+
+		</header>
+
+		     
+                   <section id="content">
+                        <div class="container_result">	                            
+                            <div style="height:80px;"></div>
+<div style="margin:20px;">
+
+<div style="width:50%;float:right">
+
+<div id="map"></div>
+
+<br>
+<table width="100%"><tr><td valign="top">
+<h2>Mission statistics</h2>
+<br>
+<table width="100%">
+  %stats%
+  <tr><td>Download</td><td><a href="/validator/.cache/path/%tmpname%.kml">KML file</a> &nbsp;&nbsp; <a href="/validator/.cache/path/%tmpname%.plan">Plan file</a></td></tr>  
+</table>
+
+</td>
+<td valign="top">
+<h2>Checklist</h2>
+<br>
+<table width="100%">
+  %checks%
+
+
+</table>
+<br><br>
+<a href="/terrain.php%urladd%">Terrain following</a>
+<br>
+<a onclick="return(confirm('Are you sure you wish to permanently delete this plan?\n\nAll data will be permanently removed from the server'));" href="%req%&delete=true">Delete this plan from the server</a>
+</td></tr></table>
+
+
+  <script>
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNzQzOTE5My01MTVmLTQzYzYtOGFiNC1iYzNiNDhjZDU3MjAiLCJpZCI6NzU2MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU0OTgzMTkwOX0.rfLAdp5UG81KODEX8xON0BStnMg9QObnR2jus097tsQ';
+
+
+var viewer = new Cesium.Viewer('map', {
+requestRenderMode: true,
+animation: false,
+timeline: false,
+homeButton: false,
+infoBox: false,
+geocoder:false,
+baseLayerPicker: false,
+sceneModePicker: false,
+terrainProvider: Cesium.createWorldTerrain()
+
+});
+var options = {
+    camera : viewer.scene.camera,
+    canvas : viewer.scene.canvas,
+clampToGround: true
+};
+
+viewer.scene.logarithmicDepthBuffer = false;
+
+var datasource = Cesium.KmlDataSource.load('https://validator.deltaquad.com/validator/.cache/path/%tmpname%.3d.kml', options);
+viewer.dataSources.add(datasource);
+
+viewer.zoomTo(datasource);
+
+
+  </script>
+
+
+</div>
+
+<div style="width:50%;min-height: 750px"">
+<h1>DeltaQuad Mission Validation Results: %status%</h1>
+<br><br>
+%errorList%
+
+
+
+<div style="width:720px">
+     <div id="chart"></div>
+</div>
+
+
+<style>
+.fixed_header{
+    width: 80%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 100px;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  background: fff;
+  color:#000;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}
+</style>
+
+
+
+
+
+<table width="500" class="fixed_header">
+	<thead>
+	<tr><td>WP #</td><td>Command</td><td>Distance</td><td>Altitude AMSL</td><td>Lowest ground</td></tr>
+</thead>
+<tbody style="height:200px; overflow:auto;">
+
+	%itemtable%
+</tbody>
+</table> 
+
+    <script>
+      
+        var options = {
+	  colors:['#00e397', '#2f8dcd', '#FF0000'],
+          series: [{
+          name: 'Ground elevation',
+	  type: 'area',
+          data: %gndarray%
+	  },
+          {
+          name: 'Flight altitude',
+	  data: %altarray%
+	  }
+	],
+          chart: {
+          type: 'line',
+          height: 350
+        },
+
+
+annotations: {
+points: 
+[
+  %pointar%
+
+]
+},
+tooltip: {
+  custom: function({series, seriesIndex, dataPointIndex, w}) {
+    groundclearing = series[1][dataPointIndex]-series[0][dataPointIndex];
+    waypoints = %waypointar%;
+    return '<div class="arrow_box"><table>' +
+      '<tr><td>Towards waypoint: </td><td align=right>' + waypoints[dataPointIndex] + '</td></tr>' +
+      '<tr><td>Flight altitude: </td><td align=right>' + series[1][dataPointIndex] + 'm</td></tr>' +
+      '<tr><td>Ground elevation: </td><td align=right>' + series[0][dataPointIndex] + 'm</td></tr>' +
+      '<tr><td>Ground clearing: </td><td align=right>' + groundclearing + 'm</td></tr>' +
+      '</table></div>'
+  }
+},
+
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        
+        title: {
+          text: 'Elevation profile',
+          align: 'left',
+          style: {
+            fontSize: '19px'
+          }
+        },
+        xaxis: {
+          type: 'numeric',
+	  title: {
+            text: 'distance (m)',
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: true
+          }
+        },
+        yaxis: {
+          tickAmount: 4,
+          floating: false,
+	  title: {
+            text: 'Height above sea level (m)',
+          },
+        
+          labels: {
+            style: {
+              color: '#8e8da4',
+            },
+            offsetY: -7,
+            offsetX: 0,
+          },
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false
+          }
+        },
+        fill: {
+          opacity: 0.5
+        },
+        grid: {
+          yaxis: {
+            lines: {
+              offsetX: -30
+            }
+          },
+          padding: {
+            left: 20
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+    </script>
+                                               
+</div>
+</div>
+
+</div>
+
+
+
+                            		<footer id="footer" style="position:sticky;bottom:0;">
+			<div class="container_footer">
+				
+				<div class="footer_second_part" style="height:40px;">
+					<div class="content_footer_second_part">
+						<span class="copyright" style="width:25%"><a href="https://www.verticaltechnologies.com">© Vertical Technologies</a></span><font size=-2 color="white"> Results are for informational purposes only, no rights can be derived from these results and all missions should be checked in accordance with the Operation Manual.</font>
+
+
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+
+
+		<script src="./files/bootstrap.min.js"></script>
+		<script src="./files/bootstrap-filestyle.min.js"></script>
+		<!-- JS NEW INTEGRATION -->
+		<script src="./files/jquery-1.11.1.min.js"></script>
+		
+</section>
+</div>
+
+</body></html>
