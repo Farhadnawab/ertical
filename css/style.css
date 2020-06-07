@@ -177,15 +177,16 @@ a{color: var(--brand-primary);}
 /*** Header ***/
 .header {
     background: #000;
-    padding: 15px;
+    padding: 15px 0;
     position: fixed;
-    z-index: 9;
+    z-index: 99;
     top: 0;
     left: 0;
     width: 100%;
 }
 .header .container {
     display: flex;
+    align-items: center;
 }
 .header .container a.logo {
     max-width: 230px;
@@ -200,6 +201,7 @@ a{color: var(--brand-primary);}
 } 
 .main-menu > ul > li{
     margin-left: 0.8rem;
+    position: relative;
 }
 .main-menu > ul > li a{
     display: block;
@@ -213,6 +215,30 @@ a{color: var(--brand-primary);}
 .main-menu > ul > li a:hover{
     background: var(--brand-primary);
     color: #fff;
+}
+.main-menu > ul ul{
+    position: absolute;
+    z-index: 9;
+    top: 100%;
+    left: 0;
+    min-width: 280px;
+    background: #000;
+    display: none;
+}
+.main-menu li:hover > ul{
+    display: block;
+}
+
+/*** Mobile Menu ***/
+.mobile-menu-btn{
+    display: none;
+    color: #fff;
+    margin-left: 2rem;
+}
+.mobile-menu-btn svg{
+    fill: currentColor;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 /*** Content Section ***/
@@ -245,10 +271,16 @@ a{color: var(--brand-primary);}
     display: inline-block;
 }
 
-/*** Chart ***/
-#chart{
+/*** Chart #chart .apexcharts-canvas svg, #chart .apexcharts-canvas svg foreignObject {
+    width: 100% !important;
+}***/
+.chart-wrapper{
     margin: 5rem 0;
     padding: 2rem;
+    overflow: auto;
+}
+.chart-wrapper #chart{
+    min-width: 500px;
 }
 
 /*** Tables ***/
@@ -267,6 +299,9 @@ table.data-table th,
 table.data-table td {
     padding: 12px 6px;
     text-align: left;
+}
+table.data-table th{
+    white-space: nowrap;
 }
 table.data-table td{
     font-size: 0.8rem;
@@ -295,7 +330,7 @@ table.data-table {
     width: 100%;
     background: #000;
     color: #fff;
-    padding: 0.6rem;
+    padding: 0.4rem 0.6rem;
     font-size: 12px;
     text-align: center;
 }
@@ -308,6 +343,8 @@ table.data-table {
 }
 
 /*** Icons ***/
+.list-icon{position: relative;padding-left: 1.8rem;}
+.list-icon svg.icons{position: absolute;left: 0;}
 svg.icons{font-size: inherit;margin-right: 0.4rem;}
 svg.icons.md{font-size: 1.2rem;}
 
@@ -331,12 +368,69 @@ svg.icons.md{font-size: 1.2rem;}
 
 }
 
-@media only screen and (max-width: 992px) and (min-width: 768px){
+@media only screen and (max-width: 992px){
 
+    .main-container > .row .left-column, .main-container > .row .right-column{
+        width: 100%;
+    }
+    .main-container > .row .right-column{
+        margin-top: 5rem;
+    }
+
+    .main-menu > ul > li a{
+        padding: 0.5rem 0.6rem;
+    }
 }
 
 @media only screen and (max-width: 768px){
     
+    .header{
+        position: absolute;
+    }
+    .footer{
+        position: relative;
+    }
+
+    .main-container{
+        padding-bottom: 50px;
+    }
+    .container{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .main-container > .row{
+        margin: 0 -15px;
+    }
+    .main-container > .row .left-column, .main-container > .row .right-column{
+        padding: 0 15px;
+    }
+    .header .container{
+        justify-content: space-between;
+    }
+
+    .mobile-menu-btn{display: block;}
+    .header .main-menu{
+        display: none;
+        position: absolute;
+        top: 100%;
+        z-index: 9;
+        left: 0;
+        background: #000;
+    }
+    .main-menu > ul > li{
+        margin-left: 0;
+    }
+    .main-menu > ul > li a {
+        padding: 1rem 0.6rem;
+        border-top: 1px solid #333;
+    }
+    .header .container .main-menu > ul{
+        flex-direction: column;
+    }
+    .main-menu > ul ul {
+        position: static;
+        padding-left: 15px;
+    }
 }
 
 @media only screen and (max-width: 640px){
@@ -369,4 +463,8 @@ svg.icons.md{font-size: 1.2rem;}
         min-width: 0;
     }
 
+    table.mission-statistics > tbody > tr > td{
+        display: block;
+        width: 100%;
+    }
 }

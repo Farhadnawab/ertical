@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-  <title>Ertical Technologies</title>	
+  <title>Vertical Technologies</title>	
 
-  <meta name="keywords" content="Ertical Technologies" />
-  <meta name="description" content="Ertical Technologies">
+  <meta name="keywords" content="Vertical Technologies" />
+  <meta name="description" content="Vertical Technologies">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
@@ -35,12 +35,26 @@
 
         <div class="main-menu">
           <ul>
-            <li><a href="javascript:void(0)">terrain following</a></li>
+            <li><a href="javascript:void(0)">terrain following</a>
+              <ul>
+                <li><a href="javascript:void(0)">Item 1</a></li>
+                <li><a href="javascript:void(0)">Item 2</a></li>
+                <li><a href="javascript:void(0)">Item 3</a></li>
+                <li><a href="javascript:void(0)">Item 4</a></li>
+              </ul>
+            </li>
             <li><a href="javascript:void(0)">delete plan</a></li>
             <li><a href="javascript:void(0)">download KML</a></li>
             <li><a href="javascript:void(0)">download plan</a></li>
           </ul>
         </div>
+          
+        <a href="javascript:void(0)" id="nav-toggle" class="mobile-menu-btn">
+          <svg class="fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+          </svg>
+        </a>
+        
       </div>
     </div>
 
@@ -55,21 +69,21 @@
           <br/><br/>
 
           <h4 class="underline-heading">Errors</h4>
-          <p><i class="icons md fas fa-times-circle"></i>Mission does not end with a VTOL_LAND item</p>
+          <p class="list-icon"><i class="icons md fas fa-times-circle"></i>Mission does not end with a VTOL_LAND item</p>
 
           <br/>
 
           <h4 class="underline-heading">Warnings</h4>
-          <p><i class="icons md fas fa-exclamation-triangle"></i>Takeoff not planned into the estimated wind direction</p>
-          <p><i class="icons md fas fa-exclamation-triangle"></i>The distance of the VTOL_TAKEOFF waypoint from the home point of 56.37m is less then 300m</p>
+          <p class="list-icon"><i class="icons md fas fa-exclamation-triangle"></i>Takeoff not planned into the estimated wind direction</p>
+          <p class="list-icon"><i class="icons md fas fa-exclamation-triangle"></i>The distance of the VTOL_TAKEOFF waypoint from the home point of 56.37m is less then 300m</p>
           
           <br/>
 
           <h4 class="underline-heading">Tips</h4>
-          <p><i class="icons md fas fa-info-circle"></i>A turnaround distance of 200m or more is recommended</p>
-          <p><i class="icons md fas fa-info-circle"></i>Set 'Fly alternating transects' in your survey for better performance</p>
+          <p class="list-icon"><i class="icons md fas fa-info-circle"></i>A turnaround distance of 200m or more is recommended</p>
+          <p class="list-icon"><i class="icons md fas fa-info-circle"></i>Set 'Fly alternating transects' in your survey for better performance</p>
           
-          <div id="chart" class="shadow-type-1"></div>
+          <div class="chart-wrapper shadow-type-1"><div id="chart"></div></div>
 
           <div class="panel shadow-type-1">
             <div class="table-responsive limit-table-height">
@@ -764,7 +778,7 @@
           
           <div class="panel shadow-type-1">
             <div class="table-responsive">
-              <table width="100%" class="data-table">
+              <table width="100%" class="data-table mission-statistics">
                 <tbody>
                   <tr>
                       <td valign="top">

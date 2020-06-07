@@ -135,3 +135,9 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
+
+
+/*** Mobile Menu ***/
+$(document).on("click","#nav-toggle",function(){
+    $(".header .main-menu").slideToggle();
+});
