@@ -198,7 +198,6 @@ a{color: var(--brand-primary);}
 .header .container a.logo {
     max-width: 230px;
 }
-.header .container .main-menu {width: 100%;}
 .header .container .main-menu > ul {
     display: flex;
     justify-content: center;
@@ -241,8 +240,10 @@ a{color: var(--brand-primary);}
     position: absolute;
     top: 100%;
     z-index: 9;
-    left: 0;
+    right: 0;
+    left: auto;
     background: #000;
+    min-width: 300px;
 }
 .main-menu > ul > li{
     margin-left: 0;
@@ -445,6 +446,7 @@ svg.icons.md{font-size: 1.2rem;}
 
 @media only screen and (max-width: 640px){
 
+    .header .main-menu{width: 100%;}
 }
 
 @media only screen and (max-width: 480px){
