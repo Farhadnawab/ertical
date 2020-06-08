@@ -114,6 +114,10 @@ a{color: var(--brand-primary);}
     width: 100%;
 }
 
+.now-wrap{
+    white-space: nowrap;
+}
+
 .container{
     width: 100%;
     max-width: 1360px;
@@ -407,10 +411,6 @@ svg.icons.md{font-size: 1.2rem;}
     }
     .main-container > .row .right-column{
         margin-top: 5rem;
-    }
-
-    .main-menu > ul > li a{
-        padding: 0.5rem 0.6rem;
     }
 }
 
